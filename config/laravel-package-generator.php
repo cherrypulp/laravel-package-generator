@@ -11,7 +11,6 @@ return [
     | Relative to base project path. Example: storage/skeleton.
     |
     */
-
     'skeleton_dir_path' => null,
-
+    'packages_dir' => 'workbench'
 ];
