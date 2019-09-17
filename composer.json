@@ -1,0 +1,46 @@
+{
+  "name": "cherrypulp/laravel-package-generator",
+  "description": "A laravel package generator",
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "package",
+    "generator"
+  ],
+  "type": "library",
+  "authors": [
+    {
+      "name": "Daniel Sum",
+      "email": "daniel@cherrypulp.com"
+    },
+    {
+      "name": "Alexander Melihov",
+      "email": "amelihovv@ya.ru"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "illuminate/container": ">=5.5.0",
+    "illuminate/console": ">=5.5.0",
+    "illuminate/filesystem": ">=5.5.0",
+    "illuminate/support": ">=5.5.0",
+    "illuminate/view": ">=5.5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cherrypulp\\LaravelPackageGenerator\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Cherrypulp\\LaravelPackageGenerator\\ServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}
