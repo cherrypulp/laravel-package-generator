@@ -2,13 +2,13 @@
 
 namespace Cherrypulp\LaravelPackageGenerator\Commands;
 
-use Cherrypulp\LaravelPackageGenerator\Commands\Traits\ChangesComposerJson;
-use Cherrypulp\LaravelPackageGenerator\Commands\Traits\CopiesSkeleton;
-use Cherrypulp\LaravelPackageGenerator\Commands\Traits\InteractsWithComposer;
-use Cherrypulp\LaravelPackageGenerator\Commands\Traits\InteractsWithGit;
-use Cherrypulp\LaravelPackageGenerator\Commands\Traits\ManipulatesPackageFolder;
 use Exception;
 use Illuminate\Console\Command;
+use Cherrypulp\LaravelPackageGenerator\Commands\Traits\CopiesSkeleton;
+use Cherrypulp\LaravelPackageGenerator\Commands\Traits\InteractsWithGit;
+use Cherrypulp\LaravelPackageGenerator\Commands\Traits\ChangesComposerJson;
+use Cherrypulp\LaravelPackageGenerator\Commands\Traits\InteractsWithComposer;
+use Cherrypulp\LaravelPackageGenerator\Commands\Traits\ManipulatesPackageFolder;
 
 class PackageNew extends Command
 {
@@ -48,7 +48,7 @@ class PackageNew extends Command
         $vendorFolderName = $this->getVendorFolderName($vendor);
         $packageFolderName = $this->getPackageFolderName($package);
 
-        $relPackagePath = "workbench/$vendorFolderName/$packageFolderName";
+        $relPackagePath = config("laravel-package-generator.packages_dir", "workbench")."/$vendorFolderName/$packageFolderName";
         $packagePath = base_path($relPackagePath);
 
         try {
@@ -59,13 +59,13 @@ class PackageNew extends Command
             $this->composerUpdatePackage($vendorFolderName, $packageFolderName);
             $this->composerDumpAutoload();
 
-            $this->info('Finished. Are you ready to write an awesome package?');
+            $this->info('Finished. Are you ready to write awesome package?');
+
+            return 0;
         } catch (Exception $e) {
             $this->error($e->getMessage());
 
             return -1;
         }
-
-        return 0;
     }
 }

@@ -2,9 +2,10 @@
 
 namespace Cherrypulp\LaravelPackageGenerator\Commands\Traits;
 
-use Cherrypulp\LaravelPackageGenerator\Exceptions\RuntimeException;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Cherrypulp\LaravelPackageGenerator\Exceptions\RuntimeException;
 
 trait ChangesComposerJson
 {
@@ -23,7 +24,9 @@ trait ChangesComposerJson
 
         $composerJson = $this->loadComposerJson();
 
-        array_set($composerJson, 'repositories', []);
+        if (! isset($composerJson['repositories'])) {
+            Arr::set($composerJson, 'repositories', []);
+        }
 
         $filtered = array_filter($composerJson['repositories'], function ($repository) use ($relPackagePath) {
             return $repository['type'] === 'path'
@@ -35,13 +38,13 @@ trait ChangesComposerJson
 
             $composerJson['repositories'][] = (object) [
                 'type' => 'path',
-                'url'  => $relPackagePath,
+                'url' => $relPackagePath,
             ];
         } else {
             $this->info('Composer repository for package is already registered.');
         }
 
-        array_set($composerJson, "require.$vendor/$package", 'dev-master');
+        Arr::set($composerJson, "require.$vendor/$package", 'dev-master');
 
         $this->saveComposerJson($composerJson);
 
@@ -84,23 +87,23 @@ trait ChangesComposerJson
     /**
      * Load and parse content of composer.json.
      *
+     * @return array
+     *
      * @throws FileNotFoundException
      * @throws RuntimeException
-     *
-     * @return array
      */
     protected function loadComposerJson()
     {
         $composerJsonPath = $this->getComposerJsonPath();
 
-        if (!File::exists($composerJsonPath)) {
+        if (! File::exists($composerJsonPath)) {
             throw new FileNotFoundException('composer.json does not exist');
         }
 
         $composerJsonContent = File::get($composerJsonPath);
         $composerJson = json_decode($composerJsonContent, true);
 
-        if (!is_array($composerJson)) {
+        if (! is_array($composerJson)) {
             throw new RuntimeException("Invalid composer.json file [$composerJsonPath]");
         }
 

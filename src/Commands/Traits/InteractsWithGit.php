@@ -2,8 +2,8 @@
 
 namespace Cherrypulp\LaravelPackageGenerator\Commands\Traits;
 
-use Cherrypulp\LaravelPackageGenerator\Exceptions\RuntimeException;
 use Illuminate\Support\Facades\File;
+use Cherrypulp\LaravelPackageGenerator\Exceptions\RuntimeException;
 
 trait InteractsWithGit
 {
@@ -37,7 +37,6 @@ trait InteractsWithGit
 
     /**
      * Init git repo.
-     *
      * @param string $repoPath
      */
     protected function initRepo($repoPath)

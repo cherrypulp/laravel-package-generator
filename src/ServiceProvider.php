@@ -2,7 +2,6 @@
 
 namespace Cherrypulp\LaravelPackageGenerator;
 
-use Cherrypulp\LaravelPackageGenerator\Commands\PackageClone;
 use Cherrypulp\LaravelPackageGenerator\Commands\PackageNew;
 use Cherrypulp\LaravelPackageGenerator\Commands\PackageRemove;
 
@@ -20,7 +19,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             $this->commands([
                 PackageNew::class,
                 PackageRemove::class,
-                PackageClone::class,
             ]);
         }
     }
