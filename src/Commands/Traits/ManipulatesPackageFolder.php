@@ -2,8 +2,8 @@
 
 namespace Cherrypulp\LaravelPackageGenerator\Commands\Traits;
 
-use Cherrypulp\LaravelPackageGenerator\Exceptions\RuntimeException;
 use Illuminate\Support\Facades\File;
+use Cherrypulp\LaravelPackageGenerator\Exceptions\RuntimeException;
 
 trait ManipulatesPackageFolder
 {
@@ -24,7 +24,7 @@ trait ManipulatesPackageFolder
             return;
         }
 
-        if (!File::makeDirectory($packagePath, 0755, true)) {
+        if (! File::makeDirectory($packagePath, 0755, true)) {
             throw new RuntimeException('Cannot create package folder');
         }
 
@@ -43,7 +43,7 @@ trait ManipulatesPackageFolder
         $this->info('Remove package folder.');
 
         if (File::exists($packagePath)) {
-            if (!File::deleteDirectory($packagePath)) {
+            if (! File::deleteDirectory($packagePath)) {
                 throw new RuntimeException('Cannot remove package folder');
             }
 

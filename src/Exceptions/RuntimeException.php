@@ -5,11 +5,10 @@ namespace Cherrypulp\LaravelPackageGenerator\Exceptions;
 class RuntimeException extends \RuntimeException
 {
     /**
-     * @param string                     $command
-     * @param int                        $exitStatusCode
-     * @param int                        $code
+     * @param string $command
+     * @param int $exitStatusCode
+     * @param int $code
      * @param \Exception|\Throwable|null $previous
-     *
      * @return static
      */
     public static function commandExecutionFailed(
@@ -27,10 +26,9 @@ class RuntimeException extends \RuntimeException
     }
 
     /**
-     * @param string                     $path
-     * @param int                        $code
+     * @param string $path
+     * @param int $code
      * @param \Exception|\Throwable|null $previous
-     *
      * @return static
      */
     public static function noAccessTo(

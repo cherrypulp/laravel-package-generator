@@ -33,11 +33,11 @@ php artisan vendor:publish --provider="Cherrypulp\LaravelPackageGenerator\Servic
 
 Create new package.
 
-Example: `php artisan package:new Melihovv SomeAwesomePackage`
+Example: `php artisan package:new Cherrypulp SomeAwesomePackage`
 
 This command will:
 
-* Create `workbench/bok/some-awesome-package` folder
+* Create `workbench/cherrypulp/some-awesome-package` folder
 * Register package in app composer.json
 * Copy package skeleton from skeleton folder to created folder (you can provide
 your custom skeleton path in config)
@@ -71,7 +71,7 @@ Interactive mode also possible.
 
 Clone the existing package.
 
-Example: `php artisan package:clone https://github.com/cherrypulp/laravel-env-validator Melihovv LaravelEnvValidator --src=src/LaravelEnvValidator`
+Example: `php artisan package:clone https://github.com/cherrypulp/laravel-env-validator Cherrypulp LaravelEnvValidator --src=src/LaravelEnvValidator`
 
 This command will:
 

@@ -2,12 +2,12 @@
 
 namespace Cherrypulp\LaravelPackageGenerator\Commands;
 
-use Cherrypulp\LaravelPackageGenerator\Commands\Traits\ChangesComposerJson;
-use Cherrypulp\LaravelPackageGenerator\Commands\Traits\InteractsWithComposer;
-use Cherrypulp\LaravelPackageGenerator\Commands\Traits\InteractsWithUser;
-use Cherrypulp\LaravelPackageGenerator\Commands\Traits\ManipulatesPackageFolder;
 use Exception;
 use Illuminate\Console\Command;
+use Cherrypulp\LaravelPackageGenerator\Commands\Traits\InteractsWithUser;
+use Cherrypulp\LaravelPackageGenerator\Commands\Traits\ChangesComposerJson;
+use Cherrypulp\LaravelPackageGenerator\Commands\Traits\InteractsWithComposer;
+use Cherrypulp\LaravelPackageGenerator\Commands\Traits\ManipulatesPackageFolder;
 
 class PackageRemove extends Command
 {
@@ -46,14 +46,16 @@ class PackageRemove extends Command
         $vendorFolderName = $this->getVendorFolderName($vendor);
         $packageFolderName = $this->getPackageFolderName($package);
 
-        $relPackagePath = "workbench/$vendorFolderName/$packageFolderName";
+        $relPackagePath = "packages/$vendorFolderName/$packageFolderName";
         $packagePath = base_path($relPackagePath);
 
         try {
             $this->composerRemovePackage($vendorFolderName, $packageFolderName);
             $this->removePackageFolder($packagePath);
-            $this->unregisterPackage($vendor, $package, "workbench/$vendorFolderName/$packageFolderName");
+            $this->unregisterPackage($vendor, $package, "packages/$vendorFolderName/$packageFolderName");
             $this->composerDumpAutoload();
+
+            return 0;
         } catch (Exception $e) {
             $this->error($e->getMessage());
 
