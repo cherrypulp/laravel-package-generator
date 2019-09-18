@@ -2,7 +2,7 @@
 
 namespace <?php echo $vendor; ?>\<?php echo $package; ?>;
 
-class <?php echo $package; ?>ServiceProvider extends \Illuminate\Support\ServiceProvider
+class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     const CONFIG_PATH = __DIR__ . '/../config/<?php echo $configFileName; ?>.php';
 
