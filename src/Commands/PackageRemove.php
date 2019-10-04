@@ -49,6 +49,12 @@ class PackageRemove extends Command
         $relPackagePath = "packages/$vendorFolderName/$packageFolderName";
         $packagePath = base_path($relPackagePath);
 
+        if (getcwd() !== base_path()) {
+            $packagePath = getcwd()."/".$relPackagePath;
+            chdir(getcwd());
+            define("LARAVEL_PACKAGE_CLI_MODE", getcwd());
+        }
+
         try {
             $this->composerRemovePackage($vendorFolderName, $packageFolderName);
             $this->removePackageFolder($packagePath);

@@ -16,6 +16,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         ], 'config');
 
         if ($this->app->runningInConsole()) {
+
+
+
             $this->commands([
                 PackageNew::class,
                 PackageRemove::class,

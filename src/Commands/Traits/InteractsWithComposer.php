@@ -45,6 +45,10 @@ trait InteractsWithComposer
     {
         $this->info("Run \"$command\".");
 
+        if (defined("LARAVEL_PACKAGE_CLI_MODE")) {
+            $command = "cd ".getcwd()." && ".$command;
+        }
+
         $output = [];
         exec($command, $output, $returnStatusCode);
 
