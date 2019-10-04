@@ -51,6 +51,12 @@ class PackageNew extends Command
         $relPackagePath = config("laravel-package-generator.packages_dir", "workbench")."/$vendorFolderName/$packageFolderName";
         $packagePath = base_path($relPackagePath);
 
+        if (getcwd() !== base_path()) {
+            $packagePath = getcwd()."/".$relPackagePath;
+            chdir(getcwd());
+            define("LARAVEL_PACKAGE_CLI_MODE", getcwd());
+        }
+
         try {
             $this->createPackageFolder($packagePath);
             $this->registerPackage($vendorFolderName, $packageFolderName, $relPackagePath);

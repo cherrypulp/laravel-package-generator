@@ -135,6 +135,10 @@ trait ChangesComposerJson
      */
     protected function getComposerJsonPath()
     {
+        if (getcwd() !== base_path()) {
+            return getcwd()."/"."composer.json";
+        }
+
         return base_path('composer.json');
     }
 }
